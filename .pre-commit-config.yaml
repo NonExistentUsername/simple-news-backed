@@ -1,0 +1,31 @@
+repos:
+  - repo: local
+    hooks:
+      - id: isort
+        name: isort
+        stages: [commit]
+        language: system
+        entry: python3 -m isort
+        types: [python]
+
+      - id: black
+        name: black
+        stages: [commit]
+        language: system
+        entry: python3 -m black
+        types: [python]
+
+      - id: flake8
+        name: flake8
+        stages: [commit]
+        language: system
+        entry: python3 -m flake8
+        types: [python]
+        exclude: setup.py
+
+      - id: mypy
+        name: mypy
+        stages: [commit]
+        language: system
+        entry: python3 -m mypy
+        types: [python]
