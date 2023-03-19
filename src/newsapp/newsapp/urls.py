@@ -7,7 +7,7 @@ from news.urls import urlpatterns as news_urlpatterns
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
-    path("news/", include(news_urlpatterns)),
+    path("api/news/", include(news_urlpatterns)),
 ]
 
 if settings.DEBUG:
