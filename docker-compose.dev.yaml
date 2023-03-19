@@ -17,6 +17,38 @@ services:
       backend-network:
         ipv4_address: 10.5.0.10
   
+  redis:
+    image: redis:7.0.5
+    container_name: newsapp-redis
+    hostname: newsapp-redis
+    restart: always
+    expose:
+      - 6379
+    volumes:
+      - dev-redis-data:/data
+    env_file:
+      - .env
+    networks:
+      backend-network:
+        ipv4_address: 10.5.0.20
+
+  celery_worker:
+    build: ./
+    container_name: newsapp-worker
+    hostname: newsapp-worker
+    restart: always
+    command: poetry run python -m celery -A newsapp worker -c 4 -B --loglevel=debug
+    env_file:
+      - .env
+    volumes:
+      - ./src/:/app/src/
+    networks:
+      backend-network:
+        ipv4_address: 10.5.0.30
+
+volumes:
+  dev-redis-data:
+
 networks:
   backend-network:
     driver: bridge

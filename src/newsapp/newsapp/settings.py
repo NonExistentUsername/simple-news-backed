@@ -1,4 +1,5 @@
 import os
+import typing as t
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -93,3 +94,13 @@ STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# celery
+
+CELERY_BROKER_URL = "redis://newsapp:6379"
+CELERY_RESULT_BACKEND = "redis://newsapp:6379"
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TASK_SERIALIZER = "json"
+CELERY_TASK_ROUTES: t.Dict[str, t.Dict[str, str]] = {}
+CELERY_STORE_ERRORS_EVEN_IF_IGNORED = True
