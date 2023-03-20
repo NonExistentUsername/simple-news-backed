@@ -16,6 +16,9 @@ class News(models.Model):
         to=User,
         on_delete=models.CASCADE,
     )
+    updated_at = models.DateTimeField(
+        auto_now=datetime.datetime.now,
+    )
     created_at = models.DateTimeField(
         auto_now_add=datetime.datetime.now,
     )
