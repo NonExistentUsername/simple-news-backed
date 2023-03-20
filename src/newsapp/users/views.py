@@ -7,8 +7,6 @@ from users.serializers import UserSerializer
 class UserView(
     viewsets.GenericViewSet,
     mixins.CreateModelMixin,
-    mixins.RetrieveModelMixin,
-    mixins.ListModelMixin,
 ):
     serializer_class = UserSerializer
     queryset = User.objects.all()
