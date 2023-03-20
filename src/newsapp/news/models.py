@@ -22,3 +22,9 @@ class News(models.Model):
     created_at = models.DateTimeField(
         auto_now_add=datetime.datetime.now,
     )
+    is_published = models.BooleanField(
+        default=False,
+    )
+    is_banned = models.BooleanField(
+        default=False,
+    )
