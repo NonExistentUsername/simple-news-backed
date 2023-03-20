@@ -11,6 +11,7 @@ class NewsView(
     mixins.RetrieveModelMixin,
     mixins.CreateModelMixin,
     mixins.ListModelMixin,
+    mixins.UpdateModelMixin,
 ):
     serializer_class = NewsSerializer
     queryset = News.objects.all()
