@@ -4,10 +4,6 @@ from rest_framework import serializers
 
 
 class NewsSerializer(serializers.ModelSerializer):
-    created_at = serializers.DateTimeField(
-        read_only=True,
-    )
-
     class Meta:
         model = News
         fields = (
@@ -17,7 +13,7 @@ class NewsSerializer(serializers.ModelSerializer):
             "created_by",
             "created_at",
         )
-        extra_kwargs = {"created_by": {"read_only": True}}
+        extra_kwargs = {"created_by": {"read_only": True}, "created_at": {"read_only": True}}
 
     def save(self, **kwargs):
         self.validated_data["created_by"] = self.context["user"]
