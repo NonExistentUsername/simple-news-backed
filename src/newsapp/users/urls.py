@@ -12,5 +12,5 @@ router = routers.DefaultRouter()
 router.register(r"users", UserView)
 
 urlpatterns: t.List[t.Any] = [
-    path("api/auth/login/", views.obtain_auth_token),
+    path("login/", views.obtain_auth_token),
 ] + router.urls
