@@ -39,7 +39,7 @@ class NewsView(
 
         object: News = self.get_object()
         if self.request.user != object.created_by:
-            return Response(status=status.HTTP_403_FORBIDDEN)
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
         if object.is_banned:
             return Response(status=status.HTTP_403_FORBIDDEN)
