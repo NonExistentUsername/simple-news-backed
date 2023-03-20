@@ -1,3 +1,10 @@
 from django.db import models
 
-# Create your models here.
+
+class News(models.Model):
+    title = models.CharField(
+        max_length=63,
+    )
+    content = models.TextField(
+        max_length=4095,
+    )
