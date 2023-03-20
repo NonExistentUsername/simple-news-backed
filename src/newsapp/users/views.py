@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from users.serializers import UserSerializer
 
 
-class UserView(
+class UserRegisterView(
     viewsets.GenericViewSet,
     mixins.CreateModelMixin,
 ):

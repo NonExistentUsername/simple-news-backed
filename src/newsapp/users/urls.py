@@ -6,10 +6,10 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
 from rest_framework.authtoken import views
-from users.views import UserView
+from users.views import UserRegisterView
 
 router = routers.DefaultRouter()
-router.register(r"users", UserView)
+router.register(r"register", UserRegisterView)
 
 urlpatterns: t.List[t.Any] = [
     path("login/", views.obtain_auth_token),
