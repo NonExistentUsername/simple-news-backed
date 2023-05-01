@@ -4,6 +4,8 @@ from rest_framework import generics, mixins, status, views, viewsets
 from rest_framework.response import Response
 from users.serializers import UserSerializer
 
+from newsapp.utils import apply_custom_response
+
 
 class UserRegisterView(
     viewsets.GenericViewSet,
@@ -11,3 +13,7 @@ class UserRegisterView(
 ):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+
+    @apply_custom_response
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
