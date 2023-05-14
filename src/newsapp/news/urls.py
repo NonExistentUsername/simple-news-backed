@@ -8,6 +8,6 @@ from news.views import NewsView
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r"news", NewsView)
+router.register(r"", NewsView)
 
 urlpatterns: t.List[t.Any] = [] + router.urls
