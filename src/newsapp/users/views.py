@@ -16,4 +16,11 @@ class UserRegisterView(
 
     @apply_custom_response
     def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
+        password = request.data.get("password")
+        response = super().create(request, *args, **kwargs)
+
+        user = User.objects.get(username=request.data.get("username"))
+        user.set_password(password)
+        user.save()
+
+        return response
