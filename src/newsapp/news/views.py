@@ -25,16 +25,22 @@ class NewsView(
     authentication_classes = [SessionAuthentication, TokenAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly]
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["created_by", "is_published"]
+    filterset_fields = ["created_by", "is_published", "title", "is_banned"]
 
     def get_queryset(self):
+        result = super().get_queryset()
+
         if self.request.user.is_staff:
-            return News.objects.all()
+            result = News.objects.all()
 
         if not self.request.user.is_anonymous:
-            return News.objects.filter((Q(is_published=True) & Q(is_banned=False)) | Q(created_by=self.request.user))
+            result = News.objects.filter((Q(is_published=True) & Q(is_banned=False)) | Q(created_by=self.request.user))
 
-        return super().get_queryset()
+        content = self.request.query_params.get("content")
+        if content:
+            result = result.filter(content__icontains=content)
+
+        return result
 
     def update(self, request, *args, **kwargs):
         if self.request.user.is_staff:
