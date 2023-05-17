@@ -20,4 +20,5 @@ class UserViewSerializer(serializers.ModelSerializer):
         fields = [
             "username",
             "email",
+            "is_staff",
         ]
