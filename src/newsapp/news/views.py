@@ -1,5 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import render
+from django_filters.rest_framework import DjangoFilterBackend
 from news.models import News
 from news.serializers import NewsSerializer
 from rest_framework import mixins, status, views, viewsets
@@ -23,6 +24,8 @@ class NewsView(
 
     authentication_classes = [SessionAuthentication, TokenAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["created_by"]
 
     def get_queryset(self):
         if self.request.user.is_staff:
