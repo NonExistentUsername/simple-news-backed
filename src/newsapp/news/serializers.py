@@ -4,6 +4,11 @@ from rest_framework import serializers
 
 
 class NewsSerializer(serializers.ModelSerializer):
+    created_by = serializers.SlugRelatedField(
+        slug_field="username",
+        queryset=User.objects.all(),
+    )
+
     class Meta:
         model = News
         fields = (
