@@ -3,11 +3,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from news.urls import urlpatterns as news_urlpatterns
-from users.urls import urlpatterns as users_urlpatterns
+from users.urls import urlpatterns as auth_urlpatterns
+from users.urls import users_urlpatterns
 
 urlpatterns = [
     path("api/news/", include(news_urlpatterns)),
-    path("api/auth/", include(users_urlpatterns)),
+    path("api/auth/", include(auth_urlpatterns)),
+    path("api/users/", include(users_urlpatterns)),
 ]
 
 if settings.DEBUG:
