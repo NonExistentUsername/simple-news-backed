@@ -25,7 +25,7 @@ class NewsView(
     authentication_classes = [SessionAuthentication, TokenAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly]
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["created_by"]
+    filterset_fields = ["created_by", "is_published"]
 
     def get_queryset(self):
         if self.request.user.is_staff:
