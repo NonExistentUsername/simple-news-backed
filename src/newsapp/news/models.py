@@ -28,3 +28,6 @@ class News(models.Model):
     is_banned = models.BooleanField(
         default=False,
     )
+
+    class Meta:
+        ordering = ["-created_at"]
