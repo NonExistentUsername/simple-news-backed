@@ -22,12 +22,14 @@ class NewsSerializer(serializers.ModelSerializer):
             "is_banned",
         )
         extra_kwargs = {
-            "created_by": {"read_only": True},
             "created_at": {"read_only": True},
             "updated_at": {"read_only": True},
-            "is_banned": {"read_only": True},
         }
 
-    def save(self, **kwargs):
-        self.validated_data["created_by"] = self.context["user"]
-        return super().save(**kwargs)
+    def create(self, validated_data):
+        validated_data["created_by"] = self.context["request"].user
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        validated_data["created_by"] = self.instance.created_by
+        return super().update(instance, validated_data)
