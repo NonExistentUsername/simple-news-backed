@@ -8,8 +8,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY") or "example"
 DEBUG = os.getenv("DEBUG") == "True"
 
-ALLOWED_HOSTS = ["0.0.0.0"]
-CORS_ALLOWED_ORIGINS = ["http://127.0.0.1:3000", "http://localhost:3000"]
+ALLOWED_HOSTS = ["*"]
+CORS_ALLOWED_ORIGINS = ["http://127.0.0.1:3000", "http://localhost:3000", "http://0.0.0.0:3000"]
 
 
 INSTALLED_APPS = [
@@ -60,8 +60,14 @@ WSGI_APPLICATION = "newsapp.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": os.getenv("MYSQL_DATABASE"),
+        "USER": "root",
+        "PASSWORD": os.getenv("MYSQL_ROOT_PASSWORD"),
+        "HOST": "db",
+        "PORT": "3306",
+        "OPTIONS": {"init_command": "SET sql_mode='STRICT_TRANS_TABLES'"},
+        "ATOMIC_REQUESTS": True,
     }
 }
 

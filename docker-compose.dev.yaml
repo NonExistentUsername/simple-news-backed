@@ -1,6 +1,21 @@
 version: '3.9'
 
 services:
+  db:
+    image: mysql:8.0
+    restart: always
+    container_name: newsapp-db
+    hostname: db
+    expose:
+      - 3306
+    env_file:
+      - .env
+    volumes:
+      - dev-db:/var/lib/mysql
+    networks:
+      backend-network:
+        ipv4_address: 10.5.0.50
+
   web:
     build: ./
     container_name: newsapp-web
@@ -48,6 +63,7 @@ services:
 
 volumes:
   dev-redis-data:
+  dev-db:
 
 networks:
   backend-network:
